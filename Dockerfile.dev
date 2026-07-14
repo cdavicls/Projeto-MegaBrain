@@ -1,0 +1,15 @@
+FROM lscr.io/linuxserver/obsidian:latest
+
+# Instala dependências de desenvolvimento (removido o npm pois já vem no nodejs da NodeSource)
+RUN apt-get update && apt-get install -y \
+    curl \
+    git \
+    nodejs \
+    ripgrep \
+    && rm -rf /var/lib/apt/lists/*
+
+# Instala o OpenCode CLI globalmente no container de testes
+RUN curl -FsSL https://opencode.ai/install | bash
+
+# Expõe a porta para acessarmos a interface gráfica do Obsidian pelo navegador
+EXPOSE 3000

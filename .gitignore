@@ -1,0 +1,13 @@
+# Arquivos do sistema operacional
+.DS_Store
+Thumbs.db
+
+# Ignorar estado atual de abas abertas no seu Obsidian (evita bagunçar a tela dos seus amigos)
+**/workspace.json
+**/.trash/
+**/backups/
+
+# Ignorar históricos de conversas privadas e chaves de API locais da IA
+**/.opencode/history/
+**/.opencode/sessions/
+**/.opencode/secrets*

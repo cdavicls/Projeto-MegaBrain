@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  obsidian-test-env:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: second-brain-tester
+    security_opt:
+      - seccomp:unconfined # Permite que o Electron (Obsidian) rode sem problemas no container
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Sao_Paulo
+    volumes:
+      # Mantém os dados internos do app Obsidian do container isolados
+      - obsidian-app-data:/config
+      # Mapeia a sua pasta local de notas para dentro do container
+      - ./second-brain-vault:/vault
+    ports:
+      - 3000:3000
+    restart: unless-stopped
+
+volumes:
+  obsidian-app-data:

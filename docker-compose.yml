@@ -6,16 +6,21 @@ services:
       context: .
       dockerfile: Dockerfile.dev
     container_name: second-brain-tester
+    # 🌟 CORREÇÃO 1: Aumenta a memória compartilhada. 
+    # O padrão do Docker é só 64MB, o que faz o terminal do Obsidian crashar.
+    shm_size: '2gb' 
     security_opt:
-      - seccomp:unconfined # Permite que o Electron (Obsidian) rode sem problemas no container
+      - seccomp:unconfined
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=America/Sao_Paulo
+      # 🌟 CORREÇÃO 2: Força o motor do Obsidian a desativar a aceleração de hardware 
+      # e usar renderização estável via CPU dentro do VNC.
+      - ELECTRON_DISABLE_GPU=1
+      - DISABLE_GPU=true
     volumes:
-      # Mantém os dados internos do app Obsidian do container isolados
       - obsidian-app-data:/config
-      # Mapeia a sua pasta local de notas para dentro do container
       - ./second-brain-vault:/vault
     ports:
       - 3000:3000

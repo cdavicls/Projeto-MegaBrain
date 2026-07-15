@@ -1,4 +1,11 @@
 {
+  "cssTheme": "Green Nightmare",
   "theme": "obsidian",
-  "accentColor": "#178c08"
+  "accentColor": "#00bd0d",
+  "nativeMenus": false,
+  "enabledCssSnippets": [
+    "calander animations",
+    "Rainbow Folder Enhanced",
+    "Rainbow Glass Folders"
+  ]
 }

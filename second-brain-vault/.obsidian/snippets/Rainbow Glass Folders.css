@@ -1,0 +1,248 @@
+/*
+ * ===================================================================
+ * Rainbow Glass Folders - Neon Green Edition
+ * Modified for True Black + Green Neon theme
+ * ===================================================================
+*/
+/* @settings
+
+name: Rainbow Glass Folders (Neon Green)
+id: rainbow-glass-folders
+settings:
+    -
+        id: main-folder-options
+        title: Main Folder Display
+        type: heading
+        level: 1
+    -
+        id: rainbow-bg-enabled
+        title: Enable Folder Background
+        description: Turns the custom folder backgrounds on or off.
+        type: class-toggle
+        default: true
+    -
+        id: full-opacity-enabled
+        title: Use Solid Background (Disable Glass)
+        description: Turns off the blurry glass effect for a solid, opaque background.
+        type: class-toggle
+        default: false
+    -
+        id: glass-folder-hover
+        title: Enable Hover Effect
+        description: Lifts the folder slightly with a shadow when you hover over it.
+        type: class-toggle
+        default: true
+    -
+        id: style-options
+        title: Style & Color Options
+        type: heading
+        level: 1
+        collapsed: false
+    -
+        id: folder-text-color-light
+        title: Text Color (Light Mode)
+        description: Enter a color for all text in Light Mode (e.g., #000000 or black).
+        type: variable-text
+        default: '#39ff14'
+    -
+        id: folder-text-color-dark
+        title: Text Color (Dark Mode)
+        description: Enter a color for all text in Dark Mode (e.g., #FFFFFF or white).
+        type: variable-text
+        default: '#39ff14'
+    -
+        id: glass-folder-opacity
+        title: Glass Opacity
+        description: Controls the transparency of the background in 'Glass Effect' mode.
+        type: variable-number-slider
+        default: 0.55
+        min: 0.1
+        max: 1.0
+        step: 0.05
+    -
+        id: glass-folder-blur
+        title: Glass Blur
+        description: Controls the blur intensity of the background in 'Glass Effect' mode.
+        type: variable-number-slider
+        default: 6
+        min: 0
+        max: 20
+        format: px
+        step: 1
+    -
+        id: glass-folder-font-weight
+        title: Font Weight
+        description: Controls the thickness of the text for all files and folders.
+        type: variable-number-slider
+        default: 500
+        min: 100
+        max: 900
+        step: 100
+    -
+        id: glass-folder-lift
+        title: Hover Lift
+        description: Controls how far the folder lifts on hover (in pixels).
+        type: variable-number-slider
+        default: 2
+        min: 0
+        max: 10
+        format: px
+        step: 1
+    -
+        id: glass-folder-border-radius
+        title: Corner Roundness
+        description: Controls the roundness of the folder corners.
+        type: variable-number-slider
+        default: 8
+        min: 0
+        max: 20
+        format: px
+        step: 1
+    -
+        id: glass-folder-vertical-spacing
+        title: Space Between Folders
+        description: Controls the vertical space below each folder (in pixels).
+        type: variable-number-slider
+        default: 5
+        min: 0
+        max: 20
+        format: px
+        step: 1
+    -
+        id: glass-folder-vertical-padding-inside
+        title: Internal Padding
+        description: Controls the top and bottom padding inside each folder.
+        type: variable-number-slider
+        default: 5
+        min: 1
+        max: 20
+        format: px
+        step: 1
+
+*/
+
+/* --- CSS Variables --- */
+body {
+    --glass-folder-opacity: 0.55;
+    --glass-folder-blur: 6px;
+    --glass-folder-font-weight: 500;
+    --glass-folder-lift: 2px;
+    --glass-folder-border-radius: 8px;
+    --glass-folder-vertical-spacing: 5px;
+    --glass-folder-vertical-padding-inside: 5px;
+    --folder-text-color-light: #39ff14;
+    --folder-text-color-dark: #39ff14;
+}
+
+/* --- Mode-Aware Variables --- */
+body.theme-light {
+    --folder-text-color: var(--folder-text-color-light);
+    --folder-shadow-color: rgba(57, 255, 20, 0.2);
+}
+body.theme-dark {
+    --glass-folder-opacity: 0.65;
+    --folder-text-color: var(--folder-text-color-dark);
+    --folder-shadow-color: rgba(57, 255, 20, 0.15);
+}
+
+/* --- Base Folder Styling --- */
+.nav-folder {
+    position: relative;
+    border-radius: var(--glass-folder-border-radius) !important;
+    padding: var(--glass-folder-vertical-padding-inside) 10px !important;
+    margin-bottom: var(--glass-folder-vertical-spacing) !important;
+    border: 1px solid transparent !important;
+    box-shadow: none;
+    background-color: transparent !important;
+    overflow: hidden;
+}
+
+/* --- LOGIC FOR THE 3 MODES --- */
+body {
+    --final-bg-opacity: 0;
+}
+body.rainbow-bg-enabled:not(.full-opacity-enabled) {
+    --final-bg-opacity: var(--glass-folder-opacity);
+}
+body.rainbow-bg-enabled.full-opacity-enabled {
+    --final-bg-opacity: 1;
+}
+
+/* Add blur and border only for Glass Effect */
+body.rainbow-bg-enabled:not(.full-opacity-enabled) .nav-files-container > div > .nav-folder {
+    -webkit-backdrop-filter: blur(var(--glass-folder-blur));
+    backdrop-filter: blur(var(--glass-folder-blur));
+    border-color: rgba(57, 255, 20, 0.15) !important;
+}
+
+/* --- RAINBOW GRADIENT STYLING - Neon Green --- */
+body.rainbow-bg-enabled .nav-files-container > div > .nav-folder {
+    background-repeat: no-repeat !important;
+    background-size: 110% 110% !important;
+    background-position: center !important;
+}
+
+body.rainbow-bg-enabled .nav-files-container > div > .nav-folder:nth-child(11n + 2) {
+    background-image: linear-gradient(90deg, rgba(10, 10, 10, var(--final-bg-opacity)), rgba(13, 59, 13, var(--final-bg-opacity)), rgba(26, 92, 26, var(--final-bg-opacity))) !important;
+}
+body.rainbow-bg-enabled .nav-files-container > div > .nav-folder:nth-child(11n + 3) {
+    background-image: linear-gradient(90deg, rgba(10, 10, 10, var(--final-bg-opacity)), rgba(15, 74, 15, var(--final-bg-opacity)), rgba(30, 107, 30, var(--final-bg-opacity))) !important;
+}
+body.rainbow-bg-enabled .nav-files-container > div > .nav-folder:nth-child(11n + 4) {
+    background-image: linear-gradient(90deg, rgba(10, 10, 10, var(--final-bg-opacity)), rgba(13, 90, 13, var(--final-bg-opacity)), rgba(26, 122, 26, var(--final-bg-opacity))) !important;
+}
+body.rainbow-bg-enabled .nav-files-container > div > .nav-folder:nth-child(11n + 5) {
+    background-image: linear-gradient(90deg, rgba(10, 10, 10, var(--final-bg-opacity)), rgba(14, 110, 14, var(--final-bg-opacity)), rgba(32, 143, 32, var(--final-bg-opacity))) !important;
+}
+body.rainbow-bg-enabled .nav-files-container > div > .nav-folder:nth-child(11n + 6) {
+    background-image: linear-gradient(90deg, rgba(10, 10, 10, var(--final-bg-opacity)), rgba(15, 127, 15, var(--final-bg-opacity)), rgba(34, 163, 34, var(--final-bg-opacity))) !important;
+}
+body.rainbow-bg-enabled .nav-files-container > div > .nav-folder:nth-child(11n + 7) {
+    background-image: linear-gradient(90deg, rgba(10, 10, 10, var(--final-bg-opacity)), rgba(16, 143, 16, var(--final-bg-opacity)), rgba(36, 183, 36, var(--final-bg-opacity))) !important;
+}
+body.rainbow-bg-enabled .nav-files-container > div > .nav-folder:nth-child(11n + 8) {
+    background-image: linear-gradient(90deg, rgba(10, 10, 10, var(--final-bg-opacity)), rgba(17, 159, 17, var(--final-bg-opacity)), rgba(38, 203, 38, var(--final-bg-opacity))) !important;
+}
+body.rainbow-bg-enabled .nav-files-container > div > .nav-folder:nth-child(11n + 9) {
+    background-image: linear-gradient(90deg, rgba(10, 10, 10, var(--final-bg-opacity)), rgba(18, 175, 18, var(--final-bg-opacity)), rgba(40, 223, 40, var(--final-bg-opacity))) !important;
+}
+body.rainbow-bg-enabled .nav-files-container > div > .nav-folder:nth-child(11n + 10) {
+    background-image: linear-gradient(90deg, rgba(10, 10, 10, var(--final-bg-opacity)), rgba(19, 191, 19, var(--final-bg-opacity)), rgba(42, 243, 42, var(--final-bg-opacity))) !important;
+}
+body.rainbow-bg-enabled .nav-files-container > div > .nav-folder:nth-child(11n + 11) {
+    background-image: linear-gradient(90deg, rgba(10, 10, 10, var(--final-bg-opacity)), rgba(20, 207, 20, var(--final-bg-opacity)), rgba(44, 255, 44, var(--final-bg-opacity))) !important;
+}
+body.rainbow-bg-enabled .nav-files-container > div > .nav-folder:nth-child(11n + 12) {
+    background-image: linear-gradient(90deg, rgba(10, 10, 10, var(--final-bg-opacity)), rgba(21, 223, 21, var(--final-bg-opacity)), rgba(46, 255, 46, var(--final-bg-opacity))) !important;
+}
+
+/* --- GLOBAL TEXT & ICON STYLING --- */
+
+.nav-folder-title-content,
+.nav-file-title-content {
+    color: var(--folder-text-color) !important;
+    font-weight: var(--glass-folder-font-weight) !important;
+    text-shadow: 0 0 8px rgba(57, 255, 20, 0.5);
+}
+
+.nav-folder-title .collapse-icon, 
+.nav-folder-title .iconize-icon,
+.nav-file-title .iconize-icon {
+    color: var(--folder-text-color) !important;
+}
+
+/* --- HIERARCHY & DIFFERENTIATION --- */
+
+.nav-folder-children .nav-folder {
+    border: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background-image: none !important;
+}
+
+/* --- Hover Effect --- */
+body.glass-folder-hover .nav-files-container > div > .nav-folder:hover {
+    transform: translateY(calc(-1 * var(--glass-folder-lift)));
+    box-shadow: 0 4px 15px var(--folder-shadow-color);
+    transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
+}

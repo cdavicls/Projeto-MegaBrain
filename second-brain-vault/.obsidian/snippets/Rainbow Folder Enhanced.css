@@ -1,0 +1,268 @@
+/*
+ * ===================================================================
+ * Rainbow Folders Enhanced - Neon Green Edition
+ * Modified for True Black + Green Neon theme
+ * ===================================================================
+*/
+
+/* @settings
+
+name: Rainbow Folder Enhanced (Neon Green)
+
+id: rainbow-folder-enhanced
+
+settings:
+    -
+        id: rainbow-folder-animation
+        title: Enable Gradient Animation
+        description: Enables smooth gradient animations for folders. note - turning on animations can be cpu intensive.
+        type: class-toggle
+        default: false
+    -
+        id: rainbow-folder-hover
+        title: Enable Hover Effects
+        description: Enables lift and shadow effects when hovering over folders.
+        type: class-toggle
+        default: true
+    -
+        id: rainbow-folder-styling
+        title: Styling Options
+        type: heading
+        level: 1
+        collapsed: true
+
+    -
+        id: rainbow-folder-font-weight
+        title: Folder Name Font Weight
+        description: Controls the font weight of folder names.
+        type: variable-number-slider
+        default: 400
+        min: 100
+        max: 900
+        step: 100
+    -
+        id: rainbow-folder-lift
+        title: Hover Lift Distance
+        description: How far folders lift when hovered (in pixels).
+        type: variable-number-slider
+        default: 2
+        min: 0
+        max: 10
+        format: px
+        step: 1
+    -
+        id: rainbow-folder-border-radius
+        title: Border Radius
+        description: Controls the roundness of folder corners.
+        type: variable-number-slider
+        default: 10
+        min: 0
+        max: 20
+        format: px
+        step: 1
+    -
+        id: rainbow-folder-animation-speed
+        title: Animation Speed
+        description: Controls how fast the gradient animation moves (in seconds).
+        type: variable-number-slider
+        default: 7
+        min: 2
+        max: 15
+        format: s
+        step: 1
+    -
+        id: rainbow-folder-vertical-spacing
+        title: Vertical Space Between Folders
+        description: Controls the vertical space below each folder (in pixels).
+        type: variable-number-slider
+        default: 6
+        min: 0
+        max: 20
+        format: px
+        step: 1
+    -
+        id: rainbow-folder-vertical-padding-inside
+        title: Vertical Padding Inside Folders
+        description: Controls the top and bottom padding within folders (in pixels).
+        type: variable-number-slider
+        default: 5
+        min: 1
+        max: 20
+        format: px
+        step: 1
+
+*/
+
+/* CSS Variables */
+body {
+    --rainbow-folder-font-weight: 400;
+    --rainbow-folder-lift: 2px;
+    --rainbow-folder-border-radius: 10px;
+    --rainbow-folder-animation-speed: 7s;
+    --rainbow-folder-vertical-spacing: 6px;
+    --rainbow-folder-vertical-padding-inside: 5px;
+}
+
+/* Base folder styling */
+.nav-files-container .nav-folder {
+    --nav-item-color: #39ff14;
+    --nav-item-color-hover: #39ff14;
+    --nav-collapse-icon-color: #39ff14;
+    
+    position: relative;
+    border-radius: var(--rainbow-folder-border-radius) !important;
+    padding: var(--rainbow-folder-vertical-padding-inside) 10px !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-bottom: var(--rainbow-folder-vertical-spacing) !important;
+    border: none;
+    box-shadow: none;
+    opacity: 0.95;
+    contain: layout style;
+}
+
+/* Folder title */
+.nav-files-container .nav-folder-title {
+    font-weight: var(--rainbow-folder-font-weight) !important;
+    background-color: transparent !important;
+}
+
+/* Hover effect */
+body.rainbow-folder-hover .nav-files-container .nav-folder {
+    transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
+}
+
+body.rainbow-folder-hover .nav-files-container .nav-folder:hover {
+    transform: translateY(calc(-1 * var(--rainbow-folder-lift)));
+    box-shadow: 0 4px 12px rgba(57, 255, 20, 0.3);
+}
+
+/* Static gradient backgrounds - Neon Green palette */
+.nav-files-container > div > .nav-folder:nth-child(11n + 2) {
+    background: linear-gradient(90deg, #0a0a0a, #0d3b0d, #1a5c1a);
+}
+
+.nav-files-container > div > .nav-folder:nth-child(11n + 3) {
+    background: linear-gradient(90deg, #0a0a0a, #0f4a0f, #1e6b1e);
+}
+
+.nav-files-container > div > .nav-folder:nth-child(11n + 4) {
+    background: linear-gradient(90deg, #0a0a0a, #0d5a0d, #1a7a1a);
+}
+
+.nav-files-container > div > .nav-folder:nth-child(11n + 5) {
+    background: linear-gradient(90deg, #0a0a0a, #0e6e0e, #208f20);
+}
+
+.nav-files-container > div > .nav-folder:nth-child(11n + 6) {
+    background: linear-gradient(90deg, #0a0a0a, #0f7f0f, #22a322);
+}
+
+.nav-files-container > div > .nav-folder:nth-child(11n + 7) {
+    background: linear-gradient(90deg, #0a0a0a, #108f10, #24b724);
+}
+
+.nav-files-container > div > .nav-folder:nth-child(11n + 8) {
+    background: linear-gradient(90deg, #0a0a0a, #119f11, #26cb26);
+}
+
+.nav-files-container > div > .nav-folder:nth-child(11n + 9) {
+    background: linear-gradient(90deg, #0a0a0a, #12af12, #28df28);
+}
+
+.nav-files-container > div > .nav-folder:nth-child(11n + 10) {
+    background: linear-gradient(90deg, #0a0a0a, #13bf13, #2af32a);
+}
+
+.nav-files-container > div > .nav-folder:nth-child(11n + 11) {
+    background: linear-gradient(90deg, #0a0a0a, #14cf14, #2cff2c);
+}
+
+.nav-files-container > div > .nav-folder:nth-child(11n + 12) {
+    background: linear-gradient(90deg, #0a0a0a, #15df15, #2eff2e);
+}
+
+/* Animated gradient backgrounds */
+body.rainbow-folder-animation .nav-files-container > div > .nav-folder:nth-child(11n + 2),
+body.rainbow-folder-animation .nav-files-container > div > .nav-folder:nth-child(11n + 3),
+body.rainbow-folder-animation .nav-files-container > div > .nav-folder:nth-child(11n + 4),
+body.rainbow-folder-animation .nav-files-container > div > .nav-folder:nth-child(11n + 5),
+body.rainbow-folder-animation .nav-files-container > div > .nav-folder:nth-child(11n + 6),
+body.rainbow-folder-animation .nav-files-container > div > .nav-folder:nth-child(11n + 7),
+body.rainbow-folder-animation .nav-files-container > div > .nav-folder:nth-child(11n + 8),
+body.rainbow-folder-animation .nav-files-container > div > .nav-folder:nth-child(11n + 9),
+body.rainbow-folder-animation .nav-files-container > div > .nav-folder:nth-child(11n + 10),
+body.rainbow-folder-animation .nav-files-container > div > .nav-folder:nth-child(11n + 11),
+body.rainbow-folder-animation .nav-files-container > div > .nav-folder:nth-child(11n + 12) {
+    background-size: 300% 300%;
+    animation: rainbow-gradient-shift var(--rainbow-folder-animation-speed) ease-in-out infinite;
+    contain: layout style;
+}
+
+/* Animation keyframes */
+@keyframes rainbow-gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Bold folder names */
+.nav-files-container .nav-folder-title .nav-file-title-content,
+.nav-files-container .nav-folder-title .nav-folder-title-content {
+    font-weight: var(--rainbow-folder-font-weight) !important;
+    position: relative;
+    z-index: 2;
+    color: #39ff14 !important;
+    text-shadow: 0 0 8px rgba(57, 255, 20, 0.5) !important;
+    background-color: transparent !important;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Subfolder Title */
+.nav-files-container .nav-folder-children .nav-folder-title .nav-folder-title-content {
+    color: rgba(57, 255, 20, 0.7) !important;
+    text-shadow: 0 0 5px rgba(57, 255, 20, 0.3) !important;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Subfolder opacity */
+.nav-files-container .nav-folder-children .nav-folder {
+    opacity: 0.8 !important;
+}
+
+/* Collapse icon */
+.nav-files-container .nav-folder-title .nav-folder-collapse-icon {
+    position: relative;
+    z-index: 2;
+    color: #39ff14 !important;
+}
+
+/* Make Subfolders Transparent */
+.nav-files-container .nav-folder-children .nav-folder {
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    opacity: 0.8 !important;
+    contain: none;
+}
+
+/* File hover effect */
+.nav-files-container .nav-file:hover .nav-file-title-content {
+    background-color: rgba(57, 255, 20, 0.15);
+    border-radius: 4px;
+    padding: 0 4px;
+    margin: 0 -4px;
+    transition: background-color 0.1s ease-out;
+}
+
+/* Ensure folder names do NOT get any hover effects */
+.nav-files-container .nav-folder-title:hover .nav-folder-title-content {
+    background-color: transparent !important;
+    text-shadow: 0 0 8px rgba(57, 255, 20, 0.5) !important;
+    transform: none !important;
+}
